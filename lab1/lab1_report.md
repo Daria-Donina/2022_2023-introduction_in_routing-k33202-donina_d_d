@@ -216,7 +216,6 @@ add bridge=bridge20 interface=ether3
 
 #### PC2
 
-
 ```
 /ip dhcp-client add disabled=no interface=bridge20
 
@@ -226,3 +225,22 @@ add bridge=bridge20 interface=ether3
 ```
 
 ### 4. Проверка работоспрособности:
+
+PC2 -> PC1:
+
+![photo_2023-01-10_00-09-01](https://user-images.githubusercontent.com/43678323/211408825-c946244b-465d-4918-9b1a-e12cdd80e6dd.jpg)
+
+PC1 -> PC2:
+
+![photo_2023-01-10_00-10-02](https://user-images.githubusercontent.com/43678323/211408937-683102bb-0967-4f54-89fc-67529ee705c9.jpg)
+
+PC1 -> SW02.02:
+
+![photo_2023-01-10_00-10-21](https://user-images.githubusercontent.com/43678323/211409028-7b6a2fcc-4245-4825-9240-ab4e0d144ecf.jpg)
+
+PC1 -> R01:
+
+![photo_2023-01-10_00-11-44](https://user-images.githubusercontent.com/43678323/211409235-35a068b6-6d24-46aa-a74c-49a9a7e01fed.jpg)
+
+# Вывод
+В ходе данной работы я ознакомилась с инструментом ContainerLab и методами работы с ним, изучила способы настройки VLAN, IP-адресации и DHCP. 
