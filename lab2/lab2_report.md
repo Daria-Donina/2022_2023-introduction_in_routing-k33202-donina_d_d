@@ -63,7 +63,7 @@ topology:
 С помощью команды ```sudo containerlab deploy``` разворачиваем сеть.
 
 ### 3. Создание схемы сети.
-
+![network-2](https://user-images.githubusercontent.com/43678323/211681549-4d3ef428-e6c3-4995-9d13-556b4cf475a9.png)
 
 ### 4. Настройка конфигурации сети.
 
