@@ -104,27 +104,25 @@ add address=192.168.20.0/24 gateway=192.168.20.1
 /interface vlan
 add interface=ether2 name=vlan10 vlan-id=10
 add interface=ether2 name=vlan20 vlan-id=20
-
-/ip address
-add address=192.168.10.1/24 interface=vlan10 network=192.168.10.0
-add address=192.168.20.1/24 interface=vlan20 network=192.168.20.0
-
-/interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
-
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
 /ip pool
 add name=pool10 ranges=192.168.10.2-192.168.10.254
 add name=pool20 ranges=192.168.20.2-192.168.20.254
-
 /ip dhcp-server
 add address-pool=pool10 disabled=no interface=vlan10 name=dhcp10
 add address-pool=pool20 disabled=no interface-vlan20 name=dhcp20
-
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+add address=192.168.10.1/24 interface=vlan10 network=192.168.10.0
+add address=192.168.20.1/24 interface=vlan20 network=192.168.20.0
+/ip dhcp-client
+add disabled=no interface=ether1
 /ip dhcp-server network
 add address=192.168.10.0/24 gateway=192.168.10.1
 add address=192.168.20.0/24 gateway=192.168.20.1
-
-/system-identity set name=R01
-/user set 0 password=******** 
+/system-identity 
+set name=R01
 ```
 #### SW01.01
 На это устройство приходит трафик с двух VLAN-ов, его необходимо передавать на маршрутизатор. Для этого создаем интерфейсы bridge.
@@ -136,28 +134,27 @@ add address=192.168.20.0/24 gateway=192.168.20.1
 add name=bridge
 add name=bridge10
 add name=bridge20
-
 /interface vlan
 add interface=ether2 name=vlan10 vlan-id=10
 add interface=ether2 name=vlan20 vlan-id=20  
 add interface=ether3 name=vlan100 vlan-id=10
 add interface=ether4 name=vlan200 vlan-id=20   
-
-/interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
-
+/interface wireless security-profiles 
+set [ find default=yes ] supplicant-identity=MikroTik
 /interface bridge port
 add bridge=bridge interface=ether2
 add bridge=bridge10 interface=vlan10
 add bridge=bridge10 interface=vlan100
 add bridge=bridge20 interface=vlan20  
 add bridge=bridge20 interface=vlan200
-
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
 /ip dhcp-client
+add disabled=no interface=ether1
 add disabled=no interface=bridge10
 add disabled=no interface=bridge20  
-
-/system-identity set name=SW01.01
-/user set 0 password=******** 
+/system-identity 
+set name=SW01.01
 ```
 
 #### SW02.01
@@ -165,20 +162,20 @@ add disabled=no interface=bridge20
 ```
 /interface bridge
 add name=bridge10
-
 /interface vlan
 add interface=ether2 name=vlan10 vlan-id=10
-
-/interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
-
+/interface wireless security-profiles 
+set [ find default=yes ] supplicant-identity=MikroTik
 /interface bridge port
 add bridge=bridge10 interface=vlan10
 add bridge=bridge10 interface=ether3
-
-/ip dhcp-client add disabled=no interface=bridge10
-
-/system-identity set name=SW02.01
-/user set 0 password=******** 
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+/ip dhcp-client 
+add disabled=no interface=ether1
+add disabled=no interface=bridge10
+/system-identity 
+set name=SW02.01
 ```
 
 #### SW02.02
@@ -186,42 +183,36 @@ add bridge=bridge10 interface=ether3
 ```
 /interface bridge
 add name=bridge20
-
 /interface vlan
 add interface=ether2 name=vlan20 vlan-id=20
-
-/interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
-
+/interface wireless security-profiles 
+set [ find default=yes ] supplicant-identity=MikroTik
 /interface bridge port
 add bridge=bridge20 interface=vlan20
 add bridge=bridge20 interface=ether3
-
-/ip dhcp-client add disabled=no interface=bridge20
-
-/system-identity set name=SW02.02
-/user set 0 password=******** 
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+/ip dhcp-client 
+add disabled=no interface=ether1
+add disabled=no interface=bridge20
+/system-identity 
+set name=SW02.02
 ```
 
-#### PC1
+#### PC1-2
 
 Аналогично предудыщим устройствам, включаем DHCP-клиент и меняем пароль:
 
 ```
-/ip dhcp-client add disabled=no interface=bridge10
-
-/interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
-
-/user set 0 password=******** 
-```
-
-#### PC2
-
-```
-/ip dhcp-client add disabled=no interface=bridge20
-
-/interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
-
-/user set 0 password=******** 
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/ip address
+add address=172.31.255.30/30 interface=ether1 network=172.31.255.28
+/ip dhcp-client
+add disabled=no interface=ether1
+add disabled=no interface=ether2
+/system identity
+set name=PC1
 ```
 
 ### 4. Проверка работоспрособности:
