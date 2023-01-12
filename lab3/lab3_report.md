@@ -355,7 +355,9 @@ PC1 -> SGI_Prism:
 ![photo_2023-01-12_02-59-45](https://user-images.githubusercontent.com/43678323/211943860-10834c03-50e1-48e0-bc4c-a069ce35bbe4.jpg)
 
 SGI_Prism -> PC1:
-![photo_2023-01-12_02-59-43](https://user-images.githubusercontent.com/43678323/211943852-fa54b2f9-945e-463a-8317-00b1c5ac090a.jpg)
+
+<img width="1003" alt="image" src="https://user-images.githubusercontent.com/43678323/211952310-802fb984-24d3-4e73-8dc0-056b73183cf2.png">
+
 
 # Таблица маршрутизации роутера R01.SPB:
 
